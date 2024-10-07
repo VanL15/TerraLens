@@ -1,18 +1,18 @@
 # tModLoader-specific Ignored Files
-*.tmod           # Compiled mod files
-*.tmodsource     # Mod source archives
-*.csproj.user    # Project-specific settings (e.g., IDE preferences)
-*.dll            # Avoid including DLLs if possible
-*.exe            # Ignore executable files if any
+*.tmod
+*.tmodsource
+*.csproj.user
+*.dll
+*.exe
 
 # IDE Specific (Visual Studio/VS Code)
-.vscode/         # VSCode settings and extensions
-.vs/             # Visual Studio settings
-*.suo            # Visual Studio Solution User Options file
-*.user           # User settings files
-*.DS_Store       # macOS specific file
-*.idea           # IntelliJ or Rider specific settings
+.vscode/
+.vs/
+*.suo
+*.user
+*.DS_Store
+*.idea
 
 # Build artifacts
-bin/             # Binaries folder
-obj/             # Object files folder
+bin/
+obj/
