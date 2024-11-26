@@ -7,10 +7,14 @@
 	<PropertyGroup>
 		
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="localization\en-US.hjson" />
+	</ItemGroup>
 
 	<!-- References -->
 	<ItemGroup>
-		
+	  <Folder Include="Project\Logging\" />
+	  <Folder Include="Project\UI\" />
 	</ItemGroup>
 
 </Project>

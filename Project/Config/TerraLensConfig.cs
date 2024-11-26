@@ -7,6 +7,8 @@ namespace TerraLens.Project.Config
     {
         public override ConfigScope Mode => ConfigScope.ClientSide;
 
+        public static TerraLensConfig Instance;
+
         [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.ShowOverlay.Label")]
         [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.ShowOverlay.Tooltip")]
         [DefaultValue(true)]
