@@ -1,0 +1,117 @@
+Mods: {
+	TerraLens: {
+		Configs: {
+			$Mods: {
+				TerraLens: {
+					Configs: {
+						TerraLensConfig: {
+							ShowOverlay: {
+								Label: Show Performance Overlay
+								Tooltip: Enable or disable the performance overlay.
+							}
+
+							CollectFPS: {
+								Label: Collect FPS
+								Tooltip: Enable or disable FPS collection.
+							}
+
+							CollectCPU: {
+								Label: Collect CPU Usage
+								Tooltip: Enable or disable CPU usage collection.
+							}
+
+							CollectMemory: {
+								Label: Collect Memory Usage
+								Tooltip: Enable or disable memory usage collection.
+							}
+
+							LagSpikeThreshold: {
+								Label: Lag Spike Threshold (ms)
+								Tooltip: Set the threshold in milliseconds for lag spike detection.
+							}
+
+							EnableDataLogging: {
+								Label: Enable Data Logging
+								Tooltip: Enable or disable performance data logging.
+							}
+
+							LoggingInterval: {
+								Label: Logging Interval (seconds)
+								Tooltip: Set the interval in seconds for data logging.
+							}
+
+							CollectModEntities: {
+								Label: Collect Mod Entities
+								Tooltip: Enable or disable the collection of mod-specific entities.
+							}
+
+							CollectModContent: {
+								Label: Collect Mod Content
+								Tooltip: Enable or disable the collection of mod-specific content counts.
+							}
+
+							EnableLagSpikeDetection: {
+								Label: Enable Lag Spike Detection
+								Tooltip: Enable or disable real-time lag spike detection.
+							}
+						}
+					}
+				}
+			}
+
+			TerraLensConfig: {
+				DisplayName: Terra Lens Config
+
+				ShowOverlay: {
+					Label: Show Overlay
+					Tooltip: ""
+				}
+
+				CollectFPS: {
+					Label: Collect F P S
+					Tooltip: ""
+				}
+
+				CollectCPU: {
+					Label: Collect C P U
+					Tooltip: ""
+				}
+
+				CollectMemory: {
+					Label: Collect Memory
+					Tooltip: ""
+				}
+
+				CollectModEntities: {
+					Label: Collect Mod Entities
+					Tooltip: ""
+				}
+
+				CollectModContent: {
+					Label: Collect Mod Content
+					Tooltip: ""
+				}
+
+				EnableLagSpikeDetection: {
+					Label: Enable Lag Spike Detection
+					Tooltip: ""
+				}
+
+				LagSpikeThreshold: {
+					Label: Lag Spike Threshold
+					Tooltip: ""
+				}
+
+				EnableDataLogging: {
+					Label: Enable Data Logging
+					Tooltip: ""
+				}
+
+				LoggingInterval: {
+					Label: Logging Interval
+					Tooltip: ""
+				}
+			}
+		}
+	}
+}
