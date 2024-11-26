@@ -1,0 +1,18 @@
+# tModLoader-specific Ignored Files
+*.tmod
+*.tmodsource
+*.csproj.user
+*.dll
+*.exe
+
+# IDE Specific (Visual Studio/VS Code)
+.vscode/
+.vs/
+*.suo
+*.user
+*.DS_Store
+*.idea
+
+# Build artifacts
+bin/
+obj/
