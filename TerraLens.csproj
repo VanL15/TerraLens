@@ -14,7 +14,6 @@
 	<!-- References -->
 	<ItemGroup>
 	  <Folder Include="Project\Logging\" />
-	  <Folder Include="Project\UI\" />
 	</ItemGroup>
 
 </Project>

@@ -17,33 +17,33 @@ namespace TerraLens.Project.Config
         [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.CollectFPS.Label")]
         [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.CollectFPS.Tooltip")]
         [DefaultValue(true)]
-        public bool CollectFPS { get; set; }  
+        public bool CollectFPS { get; set; }
 
         [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.CollectCPU.Label")]
         [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.CollectCPU.Tooltip")]
         [DefaultValue(true)]
-        public bool CollectCPU { get; set; } 
+        public bool CollectCPU { get; set; }
 
         [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.CollectMemory.Label")]
         [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.CollectMemory.Tooltip")]
         [DefaultValue(true)]
-        public bool CollectMemory { get; set; } 
+        public bool CollectMemory { get; set; }
 
 
         [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.CollectModEntities.Label")]
         [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.CollectModEntities.Tooltip")]
         [DefaultValue(true)]
-        public bool CollectModEntities { get; set; } 
+        public bool CollectModEntities { get; set; }
 
         [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.CollectModContent.Label")]
         [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.CollectModContent.Tooltip")]
         [DefaultValue(true)]
-        public bool CollectModContent { get; set; } 
+        public bool CollectModContent { get; set; }
 
         [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.EnableLagSpikeDetection.Label")]
         [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.EnableLagSpikeDetection.Tooltip")]
         [DefaultValue(true)]
-        public bool EnableLagSpikeDetection { get; set; } 
+        public bool EnableLagSpikeDetection { get; set; }
 
         [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.LagSpikeThreshold.Label")]
         [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.LagSpikeThreshold.Tooltip")]
@@ -54,12 +54,33 @@ namespace TerraLens.Project.Config
         [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.EnableDataLogging.Label")]
         [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.EnableDataLogging.Tooltip")]
         [DefaultValue(true)]
-        public bool EnableDataLogging { get; set; } 
+        public bool EnableDataLogging { get; set; }
 
         [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.LoggingInterval.Label")]
         [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.LoggingInterval.Tooltip")]
         [Range(1, 300)]
         [DefaultValue(60)]
         public int LoggingInterval { get; set; }
+
+        [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.UIPanelPosX.Label")]
+        [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.UIPanelPosX.Tooltip")]
+        [DefaultValue(300)]
+        public int UIPanelPosX { get; set; }
+
+        [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.UIPanelPosY.Label")]
+        [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.UIPanelPosY.Tooltip")]
+        [DefaultValue(200)]
+        public int UIPanelPosY { get; set; }
+
+        public override void OnLoaded()
+        {
+            Instance = this;
+        }
+
+        // Implement the Save method
+        public void Save()
+        {
+            // tModLoader automatically handles saving configurations,
+        }
     }
 }

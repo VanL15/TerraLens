@@ -54,6 +54,16 @@ Mods: {
 								Label: Enable Lag Spike Detection
 								Tooltip: Enable or disable real-time lag spike detection.
 							}
+
+							UIPanelPosX: {
+								Label: X Position of UI Panel
+								Tooltip: Set the X position of the UI panel.
+							}
+
+							UIPanelPosY: {
+								Label: Y Position of UI Panel
+								Tooltip: Set the Y position of the UI panel.
+							}
 						}
 					}
 				}
@@ -109,6 +119,16 @@ Mods: {
 
 				LoggingInterval: {
 					Label: Logging Interval
+					Tooltip: ""
+				}
+
+				UIPanelPosX: {
+					Label: UI Panel Pos X
+					Tooltip: ""
+				}
+
+				UIPanelPosY: {
+					Label: UI Panel Pos Y
 					Tooltip: ""
 				}
 			}
