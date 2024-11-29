@@ -5,7 +5,10 @@ using Microsoft.Xna.Framework;
 using TerraLens.Project.Profiling.ResourceCollectors;
 using TerraLens.Project.Config;
 using Terraria;
-using Humanizer;
+using TerraLens.Project.Profiling.ModProfilers;
+using System.Collections.Generic;
+using System.Linq;
+using TerraLens.Project.Profiling;
 
 namespace TerraLens.Project.UI
 {
@@ -31,6 +34,19 @@ namespace TerraLens.Project.UI
         private float updateTimer = 0f;
         private const float updateInterval = 1f; // 1 second
 
+        // Mod profiling elements
+        private UIList npcList;
+        private UIScrollbar npcScrollbar;
+        //private FilterButton npcFilterButton;
+        //private DropdownMenu npcDropdownMenu;
+        //private bool isNpcDropdownOpen = false;
+
+        private UIList projectileList;
+        private UIScrollbar projectileScrollbar;
+
+        private UIList itemUseList;
+        private UIScrollbar itemUseScrollbar;
+
         public override void OnInitialize()
         {
             // Main panel setup
@@ -49,7 +65,7 @@ namespace TerraLens.Project.UI
             // Title panel setup
             titlePanel = new UIPanel();
             titlePanel.Width.Set(-10f, 1f);
-            titlePanel.Height.Set(40f, 0f); 
+            titlePanel.Height.Set(40f, 0f);
             titlePanel.Top.Set(-20f, 0f); // Position partially above main panel
             titlePanel.HAlign = 0.5f;
             titlePanel.BackgroundColor = new Color(73, 94, 171);
@@ -89,7 +105,9 @@ namespace TerraLens.Project.UI
 
             // Adding tabs
             tabbedPanel.AddTab("System Metrics", CreateSystemMetricsPanel);
-            tabbedPanel.AddTab("Mod Profiling", CreateModProfilingPanel);
+            tabbedPanel.AddTab("NPCs", CreateNPCsPanel);
+            tabbedPanel.AddTab("Projectiles", CreateProjectilesPanel);
+            tabbedPanel.AddTab("Items", CreateItemsPanel);
         }
 
         private void Title_OnLeftMouseDown(UIMouseEvent evt, UIElement listeningElement)
@@ -161,6 +179,26 @@ namespace TerraLens.Project.UI
 
                     if (managedMemoryText != null && TerraLensConfig.Instance.CollectMemory)
                         managedMemoryText.SetText($"Managed Memory: {MemoryCollector.ManagedMemoryUsage} MB");
+
+                    // Update NPC List
+                    if (npcList != null && TerraLensConfig.Instance.CollectModEntities)
+                    {
+                        ModEntityProfiler.UpdateNPCs();
+                        UpdateNPCList();
+                    }
+
+                    // Update Projectile List
+                    if (projectileList != null && TerraLensConfig.Instance.CollectModEntities)
+                    {
+                        ModEntityProfiler.UpdateProjectiles();
+                        UpdateProjectileList();
+                    }
+
+                    // Update Item Use List
+                    if (itemUseList != null && TerraLensConfig.Instance.CollectModContent)
+                    {
+                        UpdateItemUseList();
+                    }
                 }
             }
         }
@@ -189,7 +227,7 @@ namespace TerraLens.Project.UI
             // Display FPS
             if (TerraLensConfig.Instance != null && TerraLensConfig.Instance.CollectFPS)
             {
-                fpsText = new UIText("FPS: 0", 0.4f, true); 
+                fpsText = new UIText("FPS: 0", 0.4f, true);
                 fpsText.Top.Set(top, 0f);
                 fpsText.Left.Set(10f, 0f);
                 panel.Append(fpsText);
@@ -199,7 +237,7 @@ namespace TerraLens.Project.UI
             // Display CPU Usage
             if (TerraLensConfig.Instance != null && TerraLensConfig.Instance.CollectCPU)
             {
-                cpuText = new UIText("CPU Usage: 0%",0.4f, true); 
+                cpuText = new UIText("CPU Usage: 0%", 0.4f, true);
                 cpuText.Top.Set(top, 0f);
                 cpuText.Left.Set(10f, 0f);
                 panel.Append(cpuText);
@@ -214,7 +252,7 @@ namespace TerraLens.Project.UI
                 physicalMemoryText.Left.Set(10f, 0f);
                 panel.Append(physicalMemoryText);
                 top += 30f;
-            
+
                 managedMemoryText = new UIText("Managed Memory: 0 MB", 0.4f, true);
                 managedMemoryText.Top.Set(top, 0f);
                 managedMemoryText.Left.Set(10f, 0f);
@@ -225,29 +263,224 @@ namespace TerraLens.Project.UI
             return panel;
         }
 
-        private UIElement CreateModProfilingPanel()
+        private UIElement CreateNPCsPanel()
         {
             var panel = new UIElement();
             panel.Width.Set(0f, 1f);
             panel.Height.Set(0f, 1f);
 
-            float top = 10f; // Start some padding from the top
+            float top = 10f;
 
             // Add a title for the tab
-            var tabTitle = new UIText("Mod Profiling", 0.8f, true); // Title text with larger font
+            var tabTitle = new UIText("NPCs", 0.8f, true);
             tabTitle.Top.Set(top, 0f);
             tabTitle.Left.Set(10f, 0f);
             panel.Append(tabTitle);
-            top += 50f; // Space below the title
 
-            var placeholder = new UIText("Mod profiling data will be displayed here.", 0.4f, true);
-            placeholder.Top.Set(top, 0f);
-            placeholder.Left.Set(10f, 0f);
-            panel.Append(placeholder);
-            top += 30f;
+            //// Create and position the Filter Button
+            //npcFilterButton = new FilterButton(() =>
+            //{
+            //    isNpcDropdownOpen = !isNpcDropdownOpen;
+            //    UpdateNPCList(); // Update the list to reflect changes
+            //});
+            //npcFilterButton.Top.Set(top, 0f); // Align with the title
+            //npcFilterButton.HAlign = 1f;      // Align to the right edge
+            //npcFilterButton.Left.Set(-90f, 0f); // Adjust based on Dropdown width + padding
+            //panel.Append(npcFilterButton);
 
+            //// Calculate the position for the dropdown menu
+            //float dropdownX = npcFilterButton.GetOuterDimensions().X;
+            //float dropdownY = npcFilterButton.GetOuterDimensions().Y + npcFilterButton.GetOuterDimensions().Height;
+
+            //// Initialize Dropdown Menu
+            //npcDropdownMenu = new DropdownMenu(GetAllMods(ModEntityProfiler.NPCCounts), new Vector2(dropdownX, dropdownY));
+            //npcDropdownMenu.Width.Set(200f, 0f);
+            //npcDropdownMenu.Height.Set(200f, 0f);
+            //npcDropdownMenu.HAlign = 1f; // Align to the right
+            //npcDropdownMenu.Left.Set(dropdownX, 0f); // Shift left by its width to align right edges
+            //npcDropdownMenu.Top.Set(dropdownY, 0f); // Below the FilterButton
+
+            // Initialize NPC List
+            top += 40f;
+            npcList = new UIList();
+            npcList.Width.Set(-30f, 1f); // Leave space for scrollbar
+            npcList.Height.Set(-top - 50f, 1f); // Fill remaining space
+            npcList.Top.Set(top, 0f);
+            npcList.Left.Set(10f, 0f);
+            panel.Append(npcList);
+
+            // Scrollbar
+            npcScrollbar = new UIScrollbar();
+            npcScrollbar.SetView(100f, 1000f);
+            npcScrollbar.Height.Set(-top - 50f, 1f);
+            npcScrollbar.Top.Set(top, 0f);
+            npcScrollbar.Left.Set(-20f, 1f);
+            npcList.SetScrollbar(npcScrollbar);
+            panel.Append(npcScrollbar);
 
             return panel;
+        }
+
+
+        private UIElement CreateProjectilesPanel()
+        {
+            var panel = new UIElement();
+            panel.Width.Set(0f, 1f);
+            panel.Height.Set(0f, 1f);
+
+            float top = 10f;
+
+            // Add a title for the tab
+            var tabTitle = new UIText("Projectiles", 0.8f, true);
+            tabTitle.Top.Set(top, 0f);
+            tabTitle.Left.Set(10f, 0f);
+            panel.Append(tabTitle);
+            top += 40f;
+
+            // Initialize Projectile List
+            projectileList = new UIList();
+            projectileList.Width.Set(-30f, 1f); // Leave space for scrollbar
+            projectileList.Height.Set(-top - 10f, 1f); // Fill remaining space
+            projectileList.Top.Set(top, 0f);
+            projectileList.Left.Set(10f, 0f);
+            panel.Append(projectileList);
+
+            // Scrollbar
+            projectileScrollbar = new UIScrollbar();
+            projectileScrollbar.SetView(100f, 1000f);
+            projectileScrollbar.Height.Set(-top - 10f, 1f);
+            projectileScrollbar.Top.Set(top, 0f);
+            projectileScrollbar.Left.Set(-20f, 1f);
+            projectileList.SetScrollbar(projectileScrollbar);
+            panel.Append(projectileScrollbar);
+
+            return panel;
+        }
+
+        private UIElement CreateItemsPanel()
+        {
+            var panel = new UIElement();
+            panel.Width.Set(0f, 1f);
+            panel.Height.Set(0f, 1f);
+
+            float top = 10f;
+
+            // Add a title for the tab
+            var tabTitle = new UIText("Items", 0.8f, true);
+            tabTitle.Top.Set(top, 0f);
+            tabTitle.Left.Set(10f, 0f);
+            panel.Append(tabTitle);
+            top += 40f;
+
+            // Initialize Item Use List
+            itemUseList = new UIList();
+            itemUseList.Width.Set(-30f, 1f); // Leave space for scrollbar
+            itemUseList.Height.Set(-top - 10f, 1f); // Fill remaining space
+            itemUseList.Top.Set(top, 0f);
+            itemUseList.Left.Set(10f, 0f);
+            panel.Append(itemUseList);
+
+            // Scrollbar
+            itemUseScrollbar = new UIScrollbar();
+            itemUseScrollbar.SetView(100f, 1000f);
+            itemUseScrollbar.Height.Set(-top - 10f, 1f);
+            itemUseScrollbar.Top.Set(top, 0f);
+            itemUseScrollbar.Left.Set(-20f, 1f);
+            itemUseList.SetScrollbar(itemUseScrollbar);
+            panel.Append(itemUseScrollbar);
+
+            return panel;
+        }
+
+        //private List<string> GetAllMods(Dictionary<string, ModEntityProfiler.EntityInfo> entityCounts)
+        //{
+        //    return entityCounts.Keys.Select(k => k.Split(':')[0]).Distinct().OrderBy(m => m).ToList();
+        //}
+
+        private void UpdateNPCList()
+        {
+            npcList.Clear();
+
+            // Get selected mods from the dropdown
+            //List<string> selectedMods = isNpcDropdownOpen ? npcDropdownMenu.GetSelectedMods() : new List<string> { "All" };
+
+            //// Apply filter
+            //var filteredNPCs = ModEntityProfiler.NPCCounts
+            //    .Where(entry =>
+            //    {
+            //        if (selectedMods.Contains("All") || selectedMods.Count == 0)
+            //            return true;
+            //        return selectedMods.Any(mod => entry.Key.StartsWith($"{mod}:"));
+            //    })
+            //    .OrderByDescending(entry => entry.Value.CurrentCount)
+            //    .ThenBy(entry => entry.Key);
+
+            //foreach (var entry in filteredNPCs)
+            //{
+            //    string npcInfo = $"{entry.Key} - Active: {entry.Value.CurrentCount}, Total Spawned: {entry.Value.TotalSpawned}";
+            //    var text = new UIText(npcInfo, 0.4f, true);
+            //    npcList.Add(text);
+            //}
+
+            //// Toggle Dropdown Menu
+            //if (isNpcDropdownOpen)
+            //{
+            //    if (!mainPanel.Children.Contains(npcDropdownMenu))
+            //    {
+            //        mainPanel.Append(npcDropdownMenu);
+            //    }
+            //}
+            //else
+            //{
+            //    if (mainPanel.Children.Contains(npcDropdownMenu))
+            //    {
+            //        mainPanel.RemoveChild(npcDropdownMenu);
+            //    }
+            //}
+
+            // Display all NPCs without filtering (which is currently disabled)
+            var allNPCs = ModEntityProfiler.NPCCounts
+                .OrderByDescending(entry => entry.Value.CurrentCount)
+                .ThenBy(entry => entry.Key);
+
+            foreach (var entry in allNPCs)
+            {
+                string npcInfo = $"{entry.Key} - Active: {entry.Value.CurrentCount}, Total Spawned: {entry.Value.TotalSpawned}";
+                var text = new UIText(npcInfo, 0.4f, true);
+                npcList.Add(text);
+            }
+        }
+
+        private void UpdateProjectileList()
+        {
+            projectileList.Clear();
+
+            var allProjectiles = ModEntityProfiler.ProjectileCounts
+                .OrderByDescending(entry => entry.Value.CurrentCount)
+                .ThenBy(entry => entry.Key);
+
+            foreach (var entry in allProjectiles)
+            {
+                string projectileInfo = $"{entry.Key} - Active: {entry.Value.CurrentCount}, Total Spawned: {entry.Value.TotalSpawned}";
+                var text = new UIText(projectileInfo, 0.4f, true);
+                projectileList.Add(text);
+            }
+        }
+
+        private void UpdateItemUseList()
+        {
+            itemUseList.Clear();
+
+            var allItemUses = PlayerInteractionProfiler.ItemUseCounts
+                .OrderByDescending(entry => entry.Value)
+                .ThenBy(entry => entry.Key);
+
+            foreach (var entry in allItemUses)
+            {
+                string itemInfo = $"{entry.Key} - Uses: {entry.Value}";
+                var text = new UIText(itemInfo, 0.4f, true);
+                itemUseList.Add(text);
+            }
         }
     }
 }

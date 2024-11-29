@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using TerraLens.Project.UI;
 using TerraLens.Project.Config;
+using TerraLens.Project.Profiling;
+using TerraLens.Project.Profiling.ModProfilers;
 using Microsoft.Xna.Framework.Input; // For Keys enum
 
 namespace TerraLens.Project
@@ -66,6 +68,22 @@ namespace TerraLens.Project
             {
                 TerraLensConfig.Instance.ShowOverlay = !TerraLensConfig.Instance.ShowOverlay;
                 TerraLensConfig.Instance.Save(); // Save the updated config
+            }
+        }
+
+        public override void PostUpdateNPCs()
+        {
+            if (TerraLensConfig.Instance != null && TerraLensConfig.Instance.CollectModEntities)
+            {
+                ModEntityProfiler.UpdateNPCs();
+            }
+        }
+
+        public override void PostUpdateProjectiles()
+        {
+            if (TerraLensConfig.Instance != null && TerraLensConfig.Instance.CollectModEntities)
+            {
+                ModEntityProfiler.UpdateProjectiles();
             }
         }
 
