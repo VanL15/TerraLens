@@ -2,7 +2,7 @@
 using Terraria.ModLoader;
 using System.Collections.Generic;
 
-namespace TerraLens.Project.Profiling
+namespace TerraLens.Project.Profiling.ModProfilers
 {
     public class PlayerInteractionProfiler : ModPlayer
     {

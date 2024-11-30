@@ -67,13 +67,12 @@ namespace TerraLens.Project
             if (toggleOverlayKeybind.JustPressed)
             {
                 TerraLensConfig.Instance.ShowOverlay = !TerraLensConfig.Instance.ShowOverlay;
-                TerraLensConfig.Instance.Save(); // Save the updated config
             }
         }
 
         public override void PostUpdateNPCs()
         {
-            if (TerraLensConfig.Instance != null && TerraLensConfig.Instance.CollectModEntities)
+            if (TerraLensConfig.Instance != null && TerraLensConfig.Instance.CollectNPCMetrics)
             {
                 ModEntityProfiler.UpdateNPCs();
             }
@@ -81,7 +80,7 @@ namespace TerraLens.Project
 
         public override void PostUpdateProjectiles()
         {
-            if (TerraLensConfig.Instance != null && TerraLensConfig.Instance.CollectModEntities)
+            if (TerraLensConfig.Instance != null && TerraLensConfig.Instance.CollectProjectileMetrics)
             {
                 ModEntityProfiler.UpdateProjectiles();
             }

@@ -1,135 +1,116 @@
 Mods: {
 	TerraLens: {
 		Configs: {
-			$Mods: {
-				TerraLens: {
-					Configs: {
-						TerraLensConfig: {
-							ShowOverlay: {
-								Label: Show Performance Overlay
-								Tooltip: Enable or disable the performance overlay.
-							}
-
-							CollectFPS: {
-								Label: Collect FPS
-								Tooltip: Enable or disable FPS collection.
-							}
-
-							CollectCPU: {
-								Label: Collect CPU Usage
-								Tooltip: Enable or disable CPU usage collection.
-							}
-
-							CollectMemory: {
-								Label: Collect Memory Usage
-								Tooltip: Enable or disable memory usage collection.
-							}
-
-							LagSpikeThreshold: {
-								Label: Lag Spike Threshold (ms)
-								Tooltip: Set the threshold in milliseconds for lag spike detection.
-							}
-
-							EnableDataLogging: {
-								Label: Enable Data Logging
-								Tooltip: Enable or disable performance data logging.
-							}
-
-							LoggingInterval: {
-								Label: Logging Interval (seconds)
-								Tooltip: Set the interval in seconds for data logging.
-							}
-
-							CollectModEntities: {
-								Label: Collect Mod Entities
-								Tooltip: Enable or disable the collection of mod-specific entities.
-							}
-
-							CollectModContent: {
-								Label: Collect Mod Content
-								Tooltip: Enable or disable the collection of mod-specific content counts.
-							}
-
-							EnableLagSpikeDetection: {
-								Label: Enable Lag Spike Detection
-								Tooltip: Enable or disable real-time lag spike detection.
-							}
-
-							UIPanelPosX: {
-								Label: X Position of UI Panel
-								Tooltip: Set the X position of the UI panel.
-							}
-
-							UIPanelPosY: {
-								Label: Y Position of UI Panel
-								Tooltip: Set the Y position of the UI panel.
-							}
-						}
-					}
-				}
-			}
-
 			TerraLensConfig: {
-				DisplayName: Terra Lens Config
+				DisplayName: TerraLens Configuration
+
+				Headers: {
+					UISettings: UI Settings
+					PerformanceMetrics: Performance Metrics
+					ModMetrics: Mod Metrics
+					LagSpikeDetection: Lag Spike Detection
+					DataLogging: Data Logging
+					AdditionalMetrics: Additional Metrics
+				}
+
+				UIPanelPosX: {
+					Label: UI Panel Position X
+					Tooltip: Sets the X position of the TerraLens UI panel.
+				}
+
+				UIPanelPosY: {
+					Label: UI Panel Position Y
+					Tooltip: Sets the Y position of the TerraLens UI panel.
+				}
 
 				ShowOverlay: {
 					Label: Show Overlay
-					Tooltip: ""
+					Tooltip: Toggle the visibility of the TerraLens overlay on the screen.
 				}
 
 				CollectFPS: {
-					Label: Collect F P S
-					Tooltip: ""
+					Label: Collect FPS
+					Tooltip: Enable FPS tracking.
 				}
 
 				CollectCPU: {
-					Label: Collect C P U
-					Tooltip: ""
+					Label: Collect CPU Usage
+					Tooltip: Enable CPU usage tracking.
 				}
 
 				CollectMemory: {
-					Label: Collect Memory
-					Tooltip: ""
+					Label: Collect Memory Usage
+					Tooltip: Enable memory usage tracking.
 				}
 
 				CollectModEntities: {
 					Label: Collect Mod Entities
-					Tooltip: ""
+					Tooltip: Enable tracking of mod entities.
 				}
 
 				CollectModContent: {
 					Label: Collect Mod Content
-					Tooltip: ""
+					Tooltip: Enable tracking of mod content.
+				}
+
+				CollectPlayerDamageMetrics: {
+					Label: Collect Player Damage Metrics
+					Tooltip: Enable tracking of damage dealt by players.
+				}
+
+				CollectNPCDamageMetrics: {
+					Label: Collect NPC Damage Metrics
+					Tooltip: Enable tracking of damage dealt by NPCs.
+				}
+
+				CollectPvPDamageMetrics: {
+					Label: Collect PvP Damage Metrics
+					Tooltip: Enable tracking of PvP damage.
+				}
+
+				CollectBiomeTimeMetrics: {
+					Label: Collect Biome Time Metrics
+					Tooltip: Enable tracking of time spent in different biomes.
+				}
+
+				CollectNPCMetrics: {
+					Label: Collect NPC Metrics
+					Tooltip: Enable tracking of NPC statistics.
+				}
+
+				CollectProjectileMetrics: {
+					Label: Collect Projectile Metrics
+					Tooltip: Enable tracking of projectile statistics.
+				}
+
+				CollectItemUseMetrics: {
+					Label: Collect Item Use Metrics
+					Tooltip: Enable tracking of item usage statistics.
+				}
+
+				CollectTileMetrics: {
+					Label: Collect Tile Metrics
+					Tooltip: Enable tracking of tile interactions.
 				}
 
 				EnableLagSpikeDetection: {
 					Label: Enable Lag Spike Detection
-					Tooltip: ""
+					Tooltip: Toggle detection of lag spikes.
 				}
 
 				LagSpikeThreshold: {
 					Label: Lag Spike Threshold
-					Tooltip: ""
+					Tooltip: Threshold for detecting lag spikes in milliseconds.
 				}
 
 				EnableDataLogging: {
 					Label: Enable Data Logging
-					Tooltip: ""
+					Tooltip: Enable logging of TerraLens data to files.
 				}
 
 				LoggingInterval: {
 					Label: Logging Interval
-					Tooltip: ""
-				}
-
-				UIPanelPosX: {
-					Label: UI Panel Pos X
-					Tooltip: ""
-				}
-
-				UIPanelPosY: {
-					Label: UI Panel Pos Y
-					Tooltip: ""
+					Tooltip: Interval in seconds between data logs.
 				}
 			}
 		}
