@@ -132,5 +132,47 @@ namespace TerraLens.Project.Config
         [DefaultValue(60)]
         [ReloadRequired]
         public int LoggingInterval { get; set; }
+
+        // Logging Categories
+        [Header("$Mods.TerraLens.Configs.TerraLensConfig.Headers.LoggingCategories")]
+        [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.LogNPCMetrics.Label")]
+        [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.LogNPCMetrics.Tooltip")]
+        [DefaultValue(true)]
+        public bool LogNPCMetrics { get; set; }
+
+        [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.LogProjectileMetrics.Label")]
+        [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.LogProjectileMetrics.Tooltip")]
+        [DefaultValue(true)]
+        public bool LogProjectileMetrics { get; set; }
+
+        [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.LogItemUseMetrics.Label")]
+        [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.LogItemUseMetrics.Tooltip")]
+        [DefaultValue(true)]
+        public bool LogItemUseMetrics { get; set; }
+
+        [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.LogTileMetrics.Label")]
+        [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.LogTileMetrics.Tooltip")]
+        [DefaultValue(true)]
+        public bool LogTileMetrics { get; set; }
+
+        [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.LogPlayerDamageMetrics.Label")]
+        [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.LogPlayerDamageMetrics.Tooltip")]
+        [DefaultValue(true)]
+        public bool LogPlayerDamageMetrics { get; set; }
+
+        [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.LogNPCDamageMetrics.Label")]
+        [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.LogNPCDamageMetrics.Tooltip")]
+        [DefaultValue(true)]
+        public bool LogNPCDamageMetrics { get; set; }
+
+        [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.LogPvPDamageMetrics.Label")]
+        [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.LogPvPDamageMetrics.Tooltip")]
+        [DefaultValue(true)]
+        public bool LogPvPDamageMetrics { get; set; }
+
+        [LabelKey("$Mods.TerraLens.Configs.TerraLensConfig.LogBiomeTimeMetrics.Label")]
+        [TooltipKey("$Mods.TerraLens.Configs.TerraLensConfig.LogBiomeTimeMetrics.Tooltip")]
+        [DefaultValue(true)]
+        public bool LogBiomeTimeMetrics { get; set; }
     }
 }

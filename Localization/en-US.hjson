@@ -11,6 +11,7 @@ Mods: {
 					LagSpikeDetection: Lag Spike Detection
 					DataLogging: Data Logging
 					AdditionalMetrics: Additional Metrics
+					LoggingCategories: Logging Categories
 				}
 
 				UIPanelPosX: {
@@ -111,6 +112,47 @@ Mods: {
 				LoggingInterval: {
 					Label: Logging Interval
 					Tooltip: Interval in seconds between data logs.
+				}
+
+				// New Logging Categories
+				LogNPCMetrics: {
+					Label: Log NPC Metrics
+					Tooltip: Enable logging for NPC statistics.
+				}
+
+				LogProjectileMetrics: {
+					Label: Log Projectile Metrics
+					Tooltip: Enable logging for projectile statistics.
+				}
+
+				LogItemUseMetrics: {
+					Label: Log Item Use Metrics
+					Tooltip: Enable logging for item usage statistics.
+				}
+
+				LogTileMetrics: {
+					Label: Log Tile Metrics
+					Tooltip: Enable logging for tile interactions.
+				}
+
+				LogPlayerDamageMetrics: {
+					Label: Log Player Damage Metrics
+					Tooltip: Enable logging for damage dealt by players.
+				}
+
+				LogNPCDamageMetrics: {
+					Label: Log NPC Damage Metrics
+					Tooltip: Enable logging for damage dealt by NPCs.
+				}
+
+				LogPvPDamageMetrics: {
+					Label: Log PvP Damage Metrics
+					Tooltip: Enable logging for PvP damage.
+				}
+
+				LogBiomeTimeMetrics: {
+					Label: Log Biome Time Metrics
+					Tooltip: Enable logging for time spent in different biomes.
 				}
 			}
 		}

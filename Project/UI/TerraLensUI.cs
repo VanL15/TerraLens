@@ -9,6 +9,7 @@ using TerraLens.Project.Profiling.ModProfilers;
 using System.Collections.Generic;
 using System.Linq;
 using TerraLens.Project.Profiling;
+using TerraLens.Project.Logging;
 using Terraria.Localization;
 using Terraria.ID;
 
@@ -688,6 +689,12 @@ namespace TerraLens.Project.UI
 
                 var row = new DataRowElement(npcName, activeCount.ToString(), totalSpawned.ToString());
                 npcList.Add(row);
+
+                // Logging NPC metrics
+                if (TerraLensConfig.Instance.EnableDataLogging && TerraLensConfig.Instance.LogNPCMetrics)
+                {
+                    TerraLensLogger.Log("NPCs", npcName, activeCount, totalSpawned);
+                }
             }
         }
 
@@ -711,6 +718,12 @@ namespace TerraLens.Project.UI
 
                 var row = new DataRowElement(projectileName, activeCount.ToString(), totalSpawned.ToString());
                 projectileList.Add(row);
+
+                // Logging Projectile metrics
+                if (TerraLensConfig.Instance.EnableDataLogging && TerraLensConfig.Instance.LogProjectileMetrics)
+                {
+                    TerraLensLogger.Log("Projectiles", projectileName, activeCount, totalSpawned);
+                }
             }
         }
 
@@ -734,6 +747,12 @@ namespace TerraLens.Project.UI
 
                 var row = new DataRowElement(itemName, uses);
                 itemUseList.Add(row);
+
+                // Logging Item Use metrics
+                if (TerraLensConfig.Instance.EnableDataLogging && TerraLensConfig.Instance.LogItemUseMetrics)
+                {
+                    TerraLensLogger.Log("ItemUse", itemName, uses, 0); 
+                }
             }
         }
 
@@ -762,6 +781,13 @@ namespace TerraLens.Project.UI
 
                 var row = new DataRowElement(tileName, placedCount, minedCount);
                 tilesList.Add(row);
+
+                // Logging Tile Interaction metrics
+                if (TerraLensConfig.Instance.EnableDataLogging && TerraLensConfig.Instance.LogTileMetrics)
+                {
+                    TerraLensLogger.Log("TilePlaced", tileName, placedCount, 0);
+                    TerraLensLogger.Log("TileMined", tileName, minedCount, 0);
+                }
             }
         }
 
@@ -786,6 +812,13 @@ namespace TerraLens.Project.UI
 
                 var damageElement = new DataRowElement(playerName, damageDealt);
                 playerDamageList.Add(damageElement);
+
+
+                // Logging Player Damage metrics
+                if (TerraLensConfig.Instance.EnableDataLogging && TerraLensConfig.Instance.LogPlayerDamageMetrics)
+                {
+                    TerraLensLogger.Log("PlayerDamage", playerName, damageDealt, 0);
+                }
             }
         }
 
@@ -810,6 +843,12 @@ namespace TerraLens.Project.UI
 
                 var damageElement = new DataRowElement(npcName, damageDealt);
                 npcDamageList.Add(damageElement);
+
+                // Logging NPC Damage metrics
+                if (TerraLensConfig.Instance.EnableDataLogging && TerraLensConfig.Instance.LogNPCDamageMetrics)
+                {
+                    TerraLensLogger.Log("NPCDamage", npcName, damageDealt, 0);
+                }
             }
         }
 
@@ -837,6 +876,12 @@ namespace TerraLens.Project.UI
 
                 var pvpElement = new DataRowElement(entityName, pvpDamage);
                 pvpDamageList.Add(pvpElement);
+
+                // Logging PvP Damage metrics
+                if (TerraLensConfig.Instance.EnableDataLogging && TerraLensConfig.Instance.LogPvPDamageMetrics)
+                {
+                    TerraLensLogger.Log("PvPDamage", entityName, pvpDamage, 0);
+                }
             }
         }
 
@@ -863,6 +908,12 @@ namespace TerraLens.Project.UI
 
                 var biomeElement = new DataRowElement(biomeName, formattedTime);
                 biomeTimeList.Add(biomeElement);
+
+                // Logging Biome Time metrics
+                if (TerraLensConfig.Instance.EnableDataLogging && TerraLensConfig.Instance.LogBiomeTimeMetrics)
+                {
+                    TerraLensLogger.Log("BiomeTime", biomeName, (int)timeSpent, 0); // TotalSpawned not applicable
+                }
             }
         }
 
