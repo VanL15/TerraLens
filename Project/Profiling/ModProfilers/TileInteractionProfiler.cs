@@ -11,7 +11,7 @@ namespace TerraLens.Project.Profiling.ModProfilers
         // Dictionary to track the number of times each tile type has been placed
         public static Dictionary<int, int> TilesPlaced = new Dictionary<int, int>();
 
-        // Optional: Dictionary to track the number of times each tile type has been mined
+        // Dictionary to track the number of times each tile type has been mined
         public static Dictionary<int, int> TilesMined = new Dictionary<int, int>();
 
         public override void PlaceInWorld(int i, int j, int type, Item item)

@@ -6,7 +6,9 @@ namespace TerraLens.Project.UI
 {
     public class UITabButton : UIPanel
     {
-        private UIText text;
+        public UIText text { get; private set; }
+        private Color inactiveColor = new Color(63, 82, 151);
+        private Color activeColor = new Color(73, 94, 171);
 
         public UITabButton(string textContent, float fontScale = 0.4f) : base()
         {
@@ -15,7 +17,7 @@ namespace TerraLens.Project.UI
             VAlign = 0f;
             Width.Set(160f, 0f); // Container width
             Height.Set(40f, 0f);
-            BackgroundColor = new Color(63, 82, 151) * 0.7f;
+            BackgroundColor = inactiveColor; //new Color(63, 82, 151) * 0.7f;
             BorderColor = Color.Black;
 
             // Add text

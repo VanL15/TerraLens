@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TerraLens.Project.Profiling;
 using Terraria.Localization;
+using Terraria.ID;
 
 namespace TerraLens.Project.UI
 {
@@ -48,9 +49,8 @@ namespace TerraLens.Project.UI
         private UIList itemUseList;
         private UIScrollbar itemUseScrollbar;
 
-        private UIList tilePlacementList;
-        private UIList tileMiningList;
-        private UIScrollbar tilePlacementScrollbar;
+        private UIList tilesList;
+        private UIScrollbar tilesScrollbar;
 
         private UIList playerDamageList;
         private UIScrollbar playerDamageScrollbar;
@@ -222,9 +222,9 @@ namespace TerraLens.Project.UI
                     }
 
                     // Update Tile Interactions
-                    if (tilePlacementList != null && tileMiningList != null && TerraLensConfig.Instance.CollectTileMetrics)
+                    if (tilesList != null && TerraLensConfig.Instance.CollectTileMetrics)
                     {
-                        UpdateTilesPanel();
+                        UpdateTilesList();
                     }
 
                     // Update Player Damage List
@@ -395,7 +395,7 @@ namespace TerraLens.Project.UI
             // Initialize Projectile List
             projectileList = new UIList();
             projectileList.Width.Set(-30f, 1f); // Leave space for scrollbar
-            projectileList.Height.Set(-top - 10f, 1f); // Fill remaining space
+            projectileList.Height.Set(-top - 50f, 1f); // Fill remaining space
             projectileList.Top.Set(top, 0f);
             projectileList.Left.Set(10f, 0f);
             panel.Append(projectileList);
@@ -403,7 +403,7 @@ namespace TerraLens.Project.UI
             // Scrollbar
             projectileScrollbar = new UIScrollbar();
             projectileScrollbar.SetView(100f, 1000f);
-            projectileScrollbar.Height.Set(-top - 10f, 1f);
+            projectileScrollbar.Height.Set(-top - 50f, 1f);
             projectileScrollbar.Top.Set(top, 0f);
             projectileScrollbar.Left.Set(-20f, 1f);
             projectileList.SetScrollbar(projectileScrollbar);
@@ -430,7 +430,7 @@ namespace TerraLens.Project.UI
             // Initialize Item Use List
             itemUseList = new UIList();
             itemUseList.Width.Set(-30f, 1f); // Leave space for scrollbar
-            itemUseList.Height.Set(-top - 10f, 1f); // Fill remaining space
+            itemUseList.Height.Set(-top - 50f, 1f); // Fill remaining space
             itemUseList.Top.Set(top, 0f);
             itemUseList.Left.Set(10f, 0f);
             panel.Append(itemUseList);
@@ -438,7 +438,7 @@ namespace TerraLens.Project.UI
             // Scrollbar
             itemUseScrollbar = new UIScrollbar();
             itemUseScrollbar.SetView(100f, 1000f);
-            itemUseScrollbar.Height.Set(-top - 10f, 1f);
+            itemUseScrollbar.Height.Set(-top - 50f, 1f);
             itemUseScrollbar.Top.Set(top, 0f);
             itemUseScrollbar.Left.Set(-20f, 1f);
             itemUseList.SetScrollbar(itemUseScrollbar);
@@ -456,60 +456,28 @@ namespace TerraLens.Project.UI
             float top = 10f;
 
             // Add a title for the tab
-            var tabTitle = new UIText("Tile Interactions", 0.8f, true);
+            var tabTitle = new UIText("Tiles", 0.8f, true);
             tabTitle.Top.Set(top, 0f);
             tabTitle.Left.Set(10f, 0f);
             panel.Append(tabTitle);
             top += 40f;
 
-            // Tile Placements Section
-            var placementsTitle = new UIText("Tiles Placed", 0.6f, true);
-            placementsTitle.Top.Set(top, 0f);
-            placementsTitle.Left.Set(10f, 0f);
-            panel.Append(placementsTitle);
-            top += 25f;
+            // Initialize Tiles List
+            tilesList = new UIList();
+            tilesList.Width.Set(-30f, 1f); // Leave space for scrollbar
+            tilesList.Height.Set(-top - 50f, 1f); // Fill remaining space
+            tilesList.Top.Set(top, 0f);
+            tilesList.Left.Set(10f, 0f);
+            panel.Append(tilesList);
 
-            // Initialize Tile Placement List
-            tilePlacementList = new UIList();
-            tilePlacementList.Width.Set(-30f, 1f); // Leave space for scrollbar
-            tilePlacementList.Height.Set(150f, 0f); // Adjust height as needed
-            tilePlacementList.Top.Set(top, 0f);
-            tilePlacementList.Left.Set(10f, 0f);
-            panel.Append(tilePlacementList);
-
-            // Scrollbar for Tile Placements
-            tilePlacementScrollbar = new UIScrollbar();
-            tilePlacementScrollbar.SetView(100f, 1000f);
-            tilePlacementScrollbar.Height.Set(150f, 0f);
-            tilePlacementScrollbar.Top.Set(top, 0f);
-            tilePlacementScrollbar.Left.Set(-20f, 1f);
-            tilePlacementList.SetScrollbar(tilePlacementScrollbar);
-            panel.Append(tilePlacementScrollbar);
-            top += 160f; // Space between placements and mining sections
-
-            // Tile Mining Section
-            var miningTitle = new UIText("Tiles Mined", 0.6f, true);
-            miningTitle.Top.Set(top, 0f);
-            miningTitle.Left.Set(10f, 0f);
-            panel.Append(miningTitle);
-            top += 25f;
-
-            // Initialize Tile Mining List
-            tileMiningList = new UIList();
-            tileMiningList.Width.Set(-30f, 1f); // Leave space for scrollbar
-            tileMiningList.Height.Set(150f, 0f); // Adjust height as needed
-            tileMiningList.Top.Set(top, 0f);
-            tileMiningList.Left.Set(10f, 0f);
-            panel.Append(tileMiningList);
-
-            // Scrollbar for Tile Mining
-            var tileMiningScrollbar = new UIScrollbar();
-            tileMiningScrollbar.SetView(100f, 1000f);
-            tileMiningScrollbar.Height.Set(150f, 0f);
-            tileMiningScrollbar.Top.Set(top, 0f);
-            tileMiningScrollbar.Left.Set(-20f, 1f);
-            tileMiningList.SetScrollbar(tileMiningScrollbar);
-            panel.Append(tileMiningScrollbar);
+            // Scrollbar
+            tilesScrollbar = new UIScrollbar();
+            tilesScrollbar.SetView(100f, 1000f);
+            tilesScrollbar.Height.Set(-top - 50f, 1f);
+            tilesScrollbar.Top.Set(top, 0f);
+            tilesScrollbar.Left.Set(-20f, 1f);
+            tilesList.SetScrollbar(tilesScrollbar);
+            panel.Append(tilesScrollbar);
 
             return panel;
         }
@@ -523,7 +491,7 @@ namespace TerraLens.Project.UI
             float top = 10f;
 
             // Add a title for the tab
-            var tabTitle = new UIText("Player Damage", 0.8f, true);
+            var tabTitle = new UIText("Player Damage Taken", 0.8f, true);
             tabTitle.Top.Set(top, 0f);
             tabTitle.Left.Set(10f, 0f);
             panel.Append(tabTitle);
@@ -558,7 +526,7 @@ namespace TerraLens.Project.UI
             float top = 10f;
 
             // Add a title for the tab
-            var tabTitle = new UIText("NPC Damage", 0.8f, true);
+            var tabTitle = new UIText("NPC Damage Dealt", 0.8f, true);
             tabTitle.Top.Set(top, 0f);
             tabTitle.Left.Set(10f, 0f);
             panel.Append(tabTitle);
@@ -701,16 +669,25 @@ namespace TerraLens.Project.UI
             //    }
             //}
 
-            // Display all NPCs without filtering (which is currently disabled)
+            var header = new DataRowElement("NPC Name", "Active", "Total Spawned");
+            header.BackgroundColor = new Color(100, 100, 100, 100); // Distinct background for header
+            npcList.Add(header);
+
+            // Display all NPCs
             var allNPCs = ModEntityProfiler.NPCCounts
                 .OrderByDescending(entry => entry.Value.CurrentCount)
                 .ThenBy(entry => entry.Key);
 
+
+
             foreach (var entry in allNPCs)
             {
-                string npcInfo = $"{entry.Key} - Active: {entry.Value.CurrentCount}, Total Spawned: {entry.Value.TotalSpawned}";
-                var text = new UIText(npcInfo, 0.4f, true);
-                npcList.Add(text);
+                string npcName = entry.Key;
+                int activeCount = entry.Value.CurrentCount;
+                int totalSpawned = entry.Value.TotalSpawned;
+
+                var row = new DataRowElement(npcName, activeCount.ToString(), totalSpawned.ToString());
+                npcList.Add(row);
             }
         }
 
@@ -718,15 +695,22 @@ namespace TerraLens.Project.UI
         {
             projectileList.Clear();
 
+            var header = new DataRowElement("Projectile Name", "Active", "Total Spawned");
+            header.BackgroundColor = new Color(100, 100, 100, 100); // Distinct background for header
+            projectileList.Add(header);
+
             var allProjectiles = ModEntityProfiler.ProjectileCounts
                 .OrderByDescending(entry => entry.Value.CurrentCount)
                 .ThenBy(entry => entry.Key);
 
             foreach (var entry in allProjectiles)
             {
-                string projectileInfo = $"{entry.Key} - Active: {entry.Value.CurrentCount}, Total Spawned: {entry.Value.TotalSpawned}";
-                var text = new UIText(projectileInfo, 0.4f, true);
-                projectileList.Add(text);
+                string projectileName = entry.Key;
+                int activeCount = entry.Value.CurrentCount;
+                int totalSpawned = entry.Value.TotalSpawned;
+
+                var row = new DataRowElement(projectileName, activeCount.ToString(), totalSpawned.ToString());
+                projectileList.Add(row);
             }
         }
 
@@ -734,71 +718,50 @@ namespace TerraLens.Project.UI
         {
             itemUseList.Clear();
 
+            // Optional: Add header row
+            var header = new DataRowElement("Item Name", "Uses");
+            header.BackgroundColor = new Color(100, 100, 100, 100); // Distinct background for header
+            itemUseList.Add(header);
+
             var allItemUses = PlayerInteractionProfiler.ItemUseCounts
                 .OrderByDescending(entry => entry.Value)
                 .ThenBy(entry => entry.Key);
 
             foreach (var entry in allItemUses)
             {
-                string itemInfo = $"{entry.Key} - Uses: {entry.Value}";
-                var text = new UIText(itemInfo, 0.4f, true);
-                itemUseList.Add(text);
+                string itemName = entry.Key;
+                int uses = entry.Value;
+
+                var row = new DataRowElement(itemName, uses);
+                itemUseList.Add(row);
             }
         }
 
-        private void UpdateTilesPanel()
+        private void UpdateTilesList()
         {
-            UpdateTilePlacements();
-            UpdateTileMinings();
-        }
+            tilesList.Clear();
 
-        private void UpdateTilePlacements()
-        {
-            tilePlacementList.Clear();
+            // Add header row
+            var header = new DataRowElement("Tile Name", "Placed Count", "Mined Count");
+            header.BackgroundColor = new Color(100, 100, 100, 100); // Distinct background for header
+            tilesList.Add(header);
 
-            // Add header row (optional)
-            var header = new TileInteractionElement("Tile Name", "Placed Count");
-            header.BackgroundColor = new Color(100, 100, 100, 100); // Optional: Different background for header
-            tilePlacementList.Add(header);
+            // Combine tile types from both TilesPlaced and TilesMined
+            var allTileTypes = new HashSet<int>(TileInteractionProfiler.TilesPlaced.Keys);
+            allTileTypes.UnionWith(TileInteractionProfiler.TilesMined.Keys);
 
-            // Sort tiles by placed count in descending order
-            var sortedTiles = TileInteractionProfiler.TilesPlaced
-                .OrderByDescending(entry => entry.Value)
-                .ThenBy(entry => entry.Key);
+            // Sort tile names by mined count
+            var sortedTileTypes = allTileTypes.OrderByDescending(type => TileInteractionProfiler.TilesMined.ContainsKey(type) ? TileInteractionProfiler.TilesMined[type] : 0)
+                .ThenBy(type => GetTileName(type));
 
-            foreach (var entry in sortedTiles)
+            foreach (var type in sortedTileTypes)
             {
-                int tileType = entry.Key;
-                int count = entry.Value;
-                string tileName = GetTileName(tileType);
+                string tileName = GetTileName(type);
+                int placedCount = TileInteractionProfiler.TilesPlaced.ContainsKey(type) ? TileInteractionProfiler.TilesPlaced[type] : 0;
+                int minedCount = TileInteractionProfiler.TilesMined.ContainsKey(type) ? TileInteractionProfiler.TilesMined[type] : 0;
 
-                var tileElement = new TileInteractionElement(tileName, count);
-                tilePlacementList.Add(tileElement);
-            }
-        }
-
-        private void UpdateTileMinings()
-        {
-            tileMiningList.Clear();
-
-            // Add header row (optional)
-            var header = new TileInteractionElement("Tile Name", "Mined Count");
-            header.BackgroundColor = new Color(100, 100, 100, 100); // Optional: Different background for header
-            tileMiningList.Add(header);
-
-            // Sort tiles by mined count in descending order
-            var sortedTiles = TileInteractionProfiler.TilesMined
-                .OrderByDescending(entry => entry.Value)
-                .ThenBy(entry => entry.Key);
-
-            foreach (var entry in sortedTiles)
-            {
-                int tileType = entry.Key;
-                int count = entry.Value;
-                string tileName = GetTileName(tileType);
-
-                var tileElement = new TileInteractionElement(tileName, count);
-                tileMiningList.Add(tileElement);
+                var row = new DataRowElement(tileName, placedCount, minedCount);
+                tilesList.Add(row);
             }
         }
 
@@ -807,7 +770,7 @@ namespace TerraLens.Project.UI
             playerDamageList.Clear();
 
             // Add header row (optional)
-            var header = new TileInteractionElement("Player Name", "Damage Dealt");
+            var header = new DataRowElement("NPC Name", "Damage Dealt");
             header.BackgroundColor = new Color(100, 100, 100, 100); // Optional: Different background for header
             playerDamageList.Add(header);
 
@@ -821,7 +784,7 @@ namespace TerraLens.Project.UI
                 string playerName = entry.Key;
                 int damageDealt = entry.Value;
 
-                var damageElement = new TileInteractionElement(playerName, damageDealt);
+                var damageElement = new DataRowElement(playerName, damageDealt);
                 playerDamageList.Add(damageElement);
             }
         }
@@ -831,7 +794,7 @@ namespace TerraLens.Project.UI
             npcDamageList.Clear();
 
             // Add header row (optional)
-            var header = new TileInteractionElement("NPC Name", "Damage Dealt");
+            var header = new DataRowElement("NPC Name", "Damage Dealt");
             header.BackgroundColor = new Color(100, 100, 100, 100); // Optional: Different background for header
             npcDamageList.Add(header);
 
@@ -845,7 +808,7 @@ namespace TerraLens.Project.UI
                 string npcName = entry.Key;
                 int damageDealt = entry.Value;
 
-                var damageElement = new TileInteractionElement(npcName, damageDealt);
+                var damageElement = new DataRowElement(npcName, damageDealt);
                 npcDamageList.Add(damageElement);
             }
         }
@@ -855,7 +818,7 @@ namespace TerraLens.Project.UI
             pvpDamageList.Clear();
 
             // Add header row (optional)
-            var header = new TileInteractionElement("Entity Name", "PvP Damage");
+            var header = new DataRowElement("Entity Name", "PvP Damage");
             header.BackgroundColor = new Color(100, 100, 100, 100); // Optional: Different background for header
             pvpDamageList.Add(header);
 
@@ -872,7 +835,7 @@ namespace TerraLens.Project.UI
                 string entityName = entry.Key;
                 int pvpDamage = entry.Value;
 
-                var pvpElement = new TileInteractionElement(entityName, pvpDamage);
+                var pvpElement = new DataRowElement(entityName, pvpDamage);
                 pvpDamageList.Add(pvpElement);
             }
         }
@@ -882,7 +845,7 @@ namespace TerraLens.Project.UI
             biomeTimeList.Clear();
 
             // Add header row (optional)
-            var header = new TileInteractionElement("Biome Name", "Time Spent");
+            var header = new DataRowElement("Biome Name", "Time Spent");
             header.BackgroundColor = new Color(100, 100, 100, 100); // Optional: Different background for header
             biomeTimeList.Add(header);
 
@@ -898,7 +861,7 @@ namespace TerraLens.Project.UI
 
                 string formattedTime = FormatTime(timeSpent);
 
-                var biomeElement = new TileInteractionElement(biomeName, formattedTime);
+                var biomeElement = new DataRowElement(biomeName, formattedTime);
                 biomeTimeList.Add(biomeElement);
             }
         }
@@ -912,21 +875,26 @@ namespace TerraLens.Project.UI
             return $"{hours}h {minutes}m {seconds}s";
         }
 
-        private string GetTileName(int tileType)
+        private string GetTileName(int type)
         {
-            var tile = TileLoader.GetTile(tileType);
-            if (tile != null && !string.IsNullOrEmpty(tile.Name))
+            // Attempt to get the ModTile
+            ModTile modTile = TileLoader.GetTile(type);
+            if (modTile != null)
             {
-                // Attempt to get the localized name
-                string localizedName = Language.GetTextValue($"TileName.{tile.Name}");
-                if (!string.IsNullOrEmpty(localizedName))
-                    return localizedName;
-
-                // Fallback to the tile's name property
-                return tile.Name;
+                // Modded tile: Use the ModTile's display name
+                return modTile.FullName;
             }
             else
             {
+                // Vanilla tile: Retrieve the internal name from TileID
+                string internalName = TileID.Search.GetName(type);
+                if (!string.IsNullOrEmpty(internalName))
+                {
+
+                        return internalName;
+                }
+
+                // Fallback if name retrieval fails
                 return "Unknown Tile";
             }
         }
